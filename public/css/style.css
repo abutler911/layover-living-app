@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.background-image {
+  background: url('https://images.unsplash.com/photo-1688297483354-3057315926a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80')
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.background-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.button-container .btn {
+  font-size: 1.2em;
+  width: 150px;
+  text-align: center;
+}
+
+.overlay {
+  position: relative;
+  color: white;
+  padding: 50px;
+  border-radius: 15px;
+}
+
+.title {
+  font-size: 3em;
+}
+
+.tagline {
+  font-size: 1.5em;
+}
+
+.button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border: none;
+  color: white;
+  background-color: #337ab7;
+}
