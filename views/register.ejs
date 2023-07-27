@@ -1,60 +1,75 @@
 <%- include('partials/header') %>
 
-<h1>Register</h1>
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Register</h1>
 
-<% if (typeof errors !== 'undefined') { %> <% errors.forEach(function(error) {
-%>
-<div class="error"><%= error.msg %></div>
-<% }) %> <% } %>
+  <% if (typeof errors !== 'undefined') { %> <% errors.forEach(function(error) {
+  %>
+  <div class="alert alert-danger"><%= error.msg %></div>
+  <% }) %> <% } %>
 
-<form action="/auth/register" method="POST">
-  <div>
-    <label for="firstName">First Name:</label>
-    <input
-      type="text"
-      id="firstName"
-      name="firstName"
-      value="<%= formData ? formData.firstName : '' %>"
-      required
-    />
-  </div>
-  <div>
-    <label for="lastName">Last Name:</label>
-    <input
-      type="text"
-      id="lastName"
-      name="lastName"
-      value="<%= formData ? formData.lastName : '' %>"
-      required
-    />
-  </div>
-  <div>
-    <label for="email">Email:</label>
-    <input
-      type="email"
-      id="email"
-      name="email"
-      value="<%= formData ? formData.email : '' %>"
-      required
-    />
-  </div>
-  <div>
-    <label for="username">Username:</label>
-    <input
-      type="text"
-      id="username"
-      name="username"
-      value="<%= formData ? formData.username : '' %>"
-      required
-    />
-  </div>
-  <div>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required />
-  </div>
-  <div>
-    <input type="submit" value="Register" />
-  </div>
-</form>
-
-<%- include('partials/footer') %>
+  <form
+    action="/auth/register"
+    method="POST"
+    class="mx-auto"
+    style="max-width: 400px"
+  >
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input
+        type="text"
+        id="firstName"
+        name="firstName"
+        value="<%= formData ? formData.firstName : '' %>"
+        required
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input
+        type="text"
+        id="lastName"
+        name="lastName"
+        value="<%= formData ? formData.lastName : '' %>"
+        required
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        value="<%= formData ? formData.email : '' %>"
+        required
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        value="<%= formData ? formData.username : '' %>"
+        required
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        required
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <input type="submit" value="Register" class="btn btn-primary btn-block" />
+    </div>
+  </form>
+</div>
