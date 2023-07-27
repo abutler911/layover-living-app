@@ -1,0 +1,51 @@
+{
+  "name": "layover-living-app",
+  "version": "1.0.0",
+  "description": "A web app for airline crews to share and discover overnight experiences in various cities.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "airline",
+    "crews",
+    "overnight",
+    "sharing",
+    "discovery",
+    "city",
+    "guide",
+    "travel"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/layover-living-app.git"
+  },
+  "author": "Andrew Butler",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.17.3",
+    "mongoose": "^7.4.1",
+    "morgan": "^1.10.0",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^16.0.1",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.0"
+  }
+}
