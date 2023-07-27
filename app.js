@@ -1,11 +1,17 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
+const expressLayouts = require('express-ejs-layouts')
+
+app.set('view engine', 'ejs')
+app.use(expressLayouts)
+app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.render('index')
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Server spun up on port ${port}...`)
 })
