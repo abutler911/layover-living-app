@@ -1,0 +1,57 @@
+<%- include('partials/header') %>
+
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Dashboard</h1>
+
+  <!-- User Profile Info -->
+  <div class="card mb-4">
+    <div class="card-header">Profile Info</div>
+    <div class="card-body">
+      <p class="card-text">
+        Your Name: <%= user.firstName %> <%= user.lastName %>
+      </p>
+      <p class="card-text">Username: <%= user.username %></p>
+      <p class="card-text">Email: <%= user.email %></p>
+    </div>
+  </div>
+
+  <!-- Recent Activity -->
+  <div class="card mb-4">
+    <div class="card-header">Recent Activity</div>
+    <ul class="list-group list-group-flush">
+      <% user.recentPosts.forEach(function(post) { %>
+      <li class="list-group-item"><%= post.title %> - <%= post.date %></li>
+      <% }) %>
+    </ul>
+  </div>
+
+  <!-- Favorite Cities -->
+  <div class="card mb-4">
+    <div class="card-header">Favorite Cities</div>
+    <ul class="list-group list-group-flush">
+      <% user.favoriteCities.forEach(function(city) { %>
+      <li class="list-group-item"><%= city %></li>
+      <% }) %>
+    </ul>
+  </div>
+
+  <!-- Recommended Cities -->
+  <div class="card mb-4">
+    <div class="card-header">Recommended Cities</div>
+    <ul class="list-group list-group-flush">
+      <% recommendedCities.forEach(function(city) { %>
+      <li class="list-group-item"><%= city %></li>
+      <% }) %>
+    </ul>
+  </div>
+
+  <!-- Notifications -->
+  <div class="card mb-4">
+    <div class="card-header">Notifications</div>
+    <ul class="list-group list-group-flush">
+      <% user.notifications.forEach(function(notification) { %>
+      <li class="list-group-item"><%= notification %></li>
+      <% }) %>
+    </ul>
+  </div>
+</div>

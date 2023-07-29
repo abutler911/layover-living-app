@@ -3,6 +3,7 @@ const router = express.Router()
 const passport = require('passport')
 const { body, validationResult } = require('express-validator')
 const User = require('../models/User')
+const { ensureAuthenticated } = require('../middlewares/auth')
 
 // GET routes
 // Register
@@ -12,7 +13,11 @@ router.get('/register', (req, res) => {
 
 // Login
 router.get('/login', (req, res) => {
-  res.render('login')
+  console.log(req.flash('error'))
+  res.render('login', {
+    formData: {},
+    errors: req.flash('error'),
+  })
 })
 
 // POST routes
@@ -33,7 +38,6 @@ router.post(
     // Check for validation errors
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      // There are errors. Render the form again with sanitized values/error messages.
       res.render('register', { errors: errors.array(), formData: req.body })
       return
     }
@@ -50,8 +54,7 @@ router.post(
             formData: req.body,
           })
         } else {
-          // User was saved successfully, redirect to login page
-          res.redirect('/login')
+          res.redirect('/auth/login')
         }
       },
     )
@@ -59,13 +62,24 @@ router.post(
 )
 
 // Login
-router.post(
-  '/login',
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true,
-  }),
-)
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return next(err)
+    }
+    if (!user) {
+      return res.render('login', {
+        formData: { username: req.body.username },
+        errors: [info.message],
+      })
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err)
+      }
+      return res.redirect('/dashboard')
+    })
+  })(req, res, next)
+})
 
 module.exports = router
