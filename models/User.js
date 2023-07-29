@@ -20,6 +20,63 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  notifications: [
+    {
+      message: {
+        type: String,
+        required: true,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
+  recentPosts: [
+    {
+      title: {
+        type: String,
+        required: true,
+      },
+      content: {
+        type: String,
+        required: true,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
+  favoriteCities: [
+    {
+      city: {
+        type: String,
+        required: true,
+      },
+      state: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  recommendedCities: [
+    {
+      city: {
+        type: String,
+        required: true,
+      },
+      state: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+
+  joined: {
+    type: Date,
+    default: Date.now,
+  },
 })
 
 UserSchema.plugin(passportLocalMongoose)
