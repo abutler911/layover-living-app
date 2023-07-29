@@ -5,6 +5,7 @@ const port = process.env.PORT || 3000
 const expressLayouts = require('express-ejs-layouts')
 const authRoutes = require('./routes/authRoutes')
 const dashboardRoutes = require('./routes/dashboardRoutes')
+const cityRoutes = require('./routes/cityRoutes')
 const connectDB = require('./config/db')
 const session = require('express-session')
 const flash = require('connect-flash')
@@ -53,6 +54,7 @@ app.use(express.static('public'))
 // Routes
 app.use('/auth', authRoutes)
 app.use('/dashboard', dashboardRoutes)
+app.use('/cities', cityRoutes)
 
 app.get('/', (req, res) => {
   res.render('index')

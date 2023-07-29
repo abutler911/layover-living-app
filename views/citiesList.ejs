@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Cities List</h1>
+
+  <!-- Cities List -->
+  <div class="row">
+    <% cities.forEach(function(city) { %>
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card h-100">
+        <img
+          src="<%= city.imageUrl %>"
+          class="card-img-top"
+          alt="<%= city.name %>"
+        />
+        <div class="card-body">
+          <h5 class="card-title"><%= city.name %></h5>
+          <p class="card-text"><%= city.description %></p>
+        </div>
+        <div class="card-footer">
+          <a href="/cities/<%= city._id %>" class="btn btn-primary">Details</a>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+</div>

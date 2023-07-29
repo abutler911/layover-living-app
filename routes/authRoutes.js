@@ -38,7 +38,6 @@ router.post(
     // Check for validation errors
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      // There are errors. Render the form again with sanitized values/error messages.
       res.render('register', { errors: errors.array(), formData: req.body })
       return
     }
@@ -55,7 +54,6 @@ router.post(
             formData: req.body,
           })
         } else {
-          // User was saved successfully, redirect to login page
           res.redirect('/auth/login')
         }
       },
