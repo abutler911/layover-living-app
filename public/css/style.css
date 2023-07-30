@@ -17,9 +17,10 @@ body {
   background-size: cover;
   height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   position: relative;
+  padding-top: 5%;
 }
 
 .background-image::before {
@@ -31,6 +32,7 @@ body {
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
 .button-container .btn {
   font-size: 1.2em;
   width: 150px;
@@ -42,6 +44,7 @@ body {
   color: white;
   padding: 50px;
   border-radius: 15px;
+  padding-top: 10px;
 }
 
 .title {
@@ -75,4 +78,23 @@ body {
 
 #register-btn:hover {
   background-color: #d3d3d3;
+}
+
+.city-image {
+  height: 300px;
+  object-fit: cover;
+}
+
+.header-image {
+  min-width: 300px;
+  margin: 0 auto;
+}
+
+.card-body h4 {
+  margin: 10px 0;
+}
+
+.list-group-item {
+  border: 1px solid #f0f0f0;
+  margin-bottom: 10px;
 }
