@@ -8,28 +8,31 @@ const fetchCityImage = require('../utils/unsplash')
 // Display a list of all cities
 router.get('/', ensureAuthenticated, async (req, res) => {
   try {
-    console.log('Fetching cities...')
-    let cities = await City.find({})
-    console.log(`Fetched ${cities.length} cities`)
+    const search = req.query.search || ''
+
+    let cities = await City.find({
+      name: new RegExp(search, 'i'), // Case-insensitive search
+    }).sort('name')
 
     // Fetch an image for each city
-    console.log('Fetching images for each city...')
     cities = await Promise.all(
       cities.map(async (city) => {
-        console.log(`Fetching image for city: ${city.name}`)
         const imageUrl = await fetchCityImage(city.name)
-        console.log(`Fetched image for city: ${city.name}`)
         return {
           ...city._doc,
           imageUrl: imageUrl,
         }
       }),
     )
-    console.log('Fetched images for all cities')
 
-    console.log('Rendering citiesList view...')
-    res.render('citiesList', { cities: cities })
-    console.log('Rendered citiesList view')
+    // Check if the request is an AJAX request
+    if (req.xhr) {
+      // If it is, respond with JSON
+      res.json({ cities: cities })
+    } else {
+      // If it's not, render the view
+      res.render('citiesList', { cities: cities })
+    }
   } catch (err) {
     console.error('Error in /cities route handler:', err)
     res.status(500).send('Server error')
@@ -57,8 +60,21 @@ router.post('/add', ensureAuthenticated, ensureAdmin, (req, res) => {
 
 // Display detailed information about a specific city
 router.get('/:cityId', ensureAuthenticated, async (req, res) => {
-  const city = await City.findById(req.params.cityId)
-  res.render('cities/show', { city: city })
+  try {
+    const cityId = req.params.cityId
+    const city = await City.findById(cityId).populate(
+      'comments.madeBy',
+      'username',
+    )
+
+    // You might also fetch an image for the city here if needed
+    const imageUrl = await fetchCityImage(city.name)
+
+    res.render('showCity', { city: city, imageUrl: imageUrl })
+  } catch (err) {
+    console.error('Error fetching city:', err)
+    res.status(500).send('Server error')
+  }
 })
 
 // Render form to edit a city's details

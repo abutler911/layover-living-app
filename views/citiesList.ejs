@@ -3,21 +3,44 @@
 <div class="container mt-5">
   <h1 class="text-center mb-4">Cities List</h1>
 
+  <!-- Search and Filter Form -->
+  <div class="row mb-4">
+    <div class="col">
+      <form class="form-inline" action="/cities" method="GET">
+        <input
+          id="search"
+          class="form-control mr-sm-2"
+          type="search"
+          placeholder="Search"
+          name="search"
+          aria-label="Search"
+        />
+        <select class="form-control mr-sm-2" name="country">
+          <option value="">Filter by Country</option>
+          <option value="USA">USA</option>
+          <!-- Add more options as needed -->
+        </select>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          Search
+        </button>
+      </form>
+    </div>
+  </div>
   <!-- Cities List -->
-  <div class="row">
+  <div class="row" id="citiesList">
     <% cities.forEach(function(city) { %>
     <div class="col-md-6 col-lg-4 mb-4">
-      <div class="card h-100">
+      <div class="card h-100 d-flex flex-column">
         <img
           src="<%= city.imageUrl %>"
-          class="card-img-top"
+          class="card-img-top city-image"
           alt="<%= city.name %>"
         />
         <div class="card-body">
           <h5 class="card-title"><%= city.name %></h5>
           <p class="card-text"><%= city.description %></p>
         </div>
-        <div class="card-footer">
+        <div class="card-footer mt-auto">
           <a href="/cities/<%= city._id %>" class="btn btn-primary">Details</a>
         </div>
       </div>
@@ -25,3 +48,41 @@
     <% }) %>
   </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#search').on('keyup', function () {
+      var search = $(this).val()
+
+      $.ajax({
+        url: '/cities',
+        method: 'GET',
+        data: { search: search },
+        success: function (response) {
+          var cities = response.cities
+          var html = ''
+
+          cities.forEach(function (city) {
+            html += `
+              <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 d-flex flex-column">
+                  <img src="${city.imageUrl}" class="card-img-top city-image" alt="${city.name}" />
+                  <div class="card-body">
+                    <h5 class="card-title">${city.name}</h5>
+                    <p class="card-text">${city.description}</p>
+                  </div>
+                  <div class="card-footer mt-auto">
+                    <a href="/cities/${city._id}" class="btn btn-primary">Details</a>
+                  </div>
+                </div>
+              </div>
+            `
+          })
+
+          $('#citiesList').html(html)
+        },
+      })
+    })
+  })
+</script>
