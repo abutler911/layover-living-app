@@ -1,7 +1,21 @@
 <%- include('partials/header') %>
+<form
+  id="favoriteForm"
+  action="/cities/favorites/add"
+  method="post"
+  style="display: none"
+>
+  <input type="hidden" id="favoriteCityId" name="cityId" value="" />
+</form>
 
 <!-- Header Section -->
 <div class="container-fluid bg-light text-center py-5">
+  <% if (locals.success) { %>
+  <div class="alert alert-success"><%= success %></div>
+  <% } %> <% if (locals.error) { %>
+  <div class="alert alert-danger"><%= error %></div>
+  <% } %>
+
   <div class="city-header">
     <h1 class="display-4">
       <%= city.name %>, <%= city.state %>
@@ -127,8 +141,8 @@
 
   <script>
     function addToFavorites(cityId) {
-      // Make an API request to add the city to the user's favorites.
-      // You can handle this logic server-side.
+      document.getElementById('favoriteCityId').value = cityId
+      document.getElementById('favoriteForm').submit()
     }
   </script>
 </div>

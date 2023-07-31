@@ -93,4 +93,19 @@ router.put('/:cityId', ensureAuthenticated, async (req, res) => {
   res.redirect(`/cities/${updatedCity._id}`)
 })
 
+router.post('/favorites/add', (req, res) => {
+  const userId = req.user._id
+  const cityId = req.body.cityId
+
+  // Logic to add the city to the user's favorites
+
+  // If successful
+  req.flash('success', 'City added to favorites!')
+  res.redirect(`/cities/${cityId}`)
+
+  // If an error occurs
+  req.flash('error', 'Something went wrong. Please try again.')
+  res.redirect(`/cities/${cityId}`)
+})
+
 module.exports = router
