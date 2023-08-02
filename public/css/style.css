@@ -33,12 +33,6 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.button-container .btn {
-  font-size: 1.2em;
-  width: 150px;
-  text-align: center;
-}
-
 .overlay {
   position: relative;
   color: white;
@@ -60,6 +54,7 @@ body {
   padding: 10px 20px;
   font-size: 1.2em;
   border: none;
+  transition: all 0.3s ease;
 }
 
 #login-btn {
@@ -93,8 +88,90 @@ body {
 .card-body h4 {
   margin: 10px 0;
 }
-
+.user-info {
+  margin: 10px 0;
+  color: #000;
+}
 .list-group-item {
   border: 1px solid #f0f0f0;
   margin-bottom: 10px;
+}
+
+.container-fluid.bg-light {
+  background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+  border-bottom: 1px solid #dee2e6;
+}
+.display-4 {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.country-name {
+  font-size: 1.2em;
+  font-weight: 400;
+  margin-top: 10px;
+}
+/* h1.display-4 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #343a40;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-shadow: #ffffff;
+} */
+
+.progress-bar {
+  background-color: #007bff;
+  border-radius: 5px;
+}
+
+.btn-outline-primary {
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  color: #000;
+  transition: all 0.3s ease;
+  font-size: 0.8rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+#rating,
+#safetyRating {
+  border-radius: 5px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.card h5 {
+  color: #343a40;
+}
+
+.card-img-top {
+  border-radius: 5px 5px 0 0;
+}
+
+.card-body {
+  background-color: #f8f9fa;
+  transition: background-color 0.3s ease;
+}
+
+.card-body:hover {
+  background-color: #e9ecef;
 }
