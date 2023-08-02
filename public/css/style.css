@@ -113,19 +113,18 @@ body {
   font-weight: 400;
   margin-top: 10px;
 }
-h1.display-4 {
+/* h1.display-4 {
   font-size: 1.8rem;
   font-weight: 700;
   color: #343a40;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #b5c8d8;
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 20px;
   text-shadow: #ffffff;
-}
+} */
 
 .progress-bar {
   background-color: #007bff;

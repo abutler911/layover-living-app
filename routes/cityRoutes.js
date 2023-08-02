@@ -4,6 +4,7 @@ const router = express.Router()
 const { ensureAuthenticated, ensureAdmin } = require('../middlewares/auth')
 const City = require('../models/City')
 const fetchCityImage = require('../utils/unsplash')
+const User = require('../models/User') // Adjust the path to your User model
 
 // Display a list of all cities
 router.get('/', ensureAuthenticated, async (req, res) => {
@@ -70,7 +71,12 @@ router.get('/:cityId', ensureAuthenticated, async (req, res) => {
     // You might also fetch an image for the city here if needed
     const imageUrl = await fetchCityImage(city.name)
 
-    res.render('showCity', { city: city, imageUrl: imageUrl })
+    res.render('showCity', {
+      city: city,
+      imageUrl: imageUrl,
+      success: req.flash('success'),
+      error: req.flash('error'),
+    })
   } catch (err) {
     console.error('Error fetching city:', err)
     res.status(500).send('Server error')
@@ -93,18 +99,30 @@ router.put('/:cityId', ensureAuthenticated, async (req, res) => {
   res.redirect(`/cities/${updatedCity._id}`)
 })
 
-router.post('/favorites/add', (req, res) => {
+router.post('/favorites/add', async (req, res) => {
   const userId = req.user._id
   const cityId = req.body.cityId
 
-  // Logic to add the city to the user's favorites
+  try {
+    // Find the city by its ID
+    const city = await City.findById(cityId)
 
-  // If successful
-  req.flash('success', 'City added to favorites!')
-  res.redirect(`/cities/${cityId}`)
+    // Update the user's profile with the new favorite city
+    await User.findByIdAndUpdate(userId, {
+      $addToSet: {
+        favoriteCities: {
+          city: city.name,
+          state: city.state,
+        },
+      },
+    })
 
-  // If an error occurs
-  req.flash('error', 'Something went wrong. Please try again.')
+    req.flash('success', 'City added to favorites!')
+  } catch (error) {
+    console.error('Error adding city to favorites:', error)
+    req.flash('error', 'Something went wrong. Please try again.')
+  }
+
   res.redirect(`/cities/${cityId}`)
 })
 
